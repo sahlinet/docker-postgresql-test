@@ -6,7 +6,7 @@ echo $ID
 sleep 8
 docker logs $ID
 export PGPASSWORD=test
-echo "select * from dual" | psql -h localhost -p 55432 -U test test 
+echo "SELECT 1 WHERE 1 = 0" | psql -h localhost -p 55432 -U test test 
 rc=$?
 docker stop $ID 2>/dev/null
 docker rm $ID 2>/dev/null
