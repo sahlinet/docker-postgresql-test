@@ -1,6 +1,8 @@
 echo "Setup Postgresql"
 su postgres -c "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf" &
 
+sleep 5
+
 echo "Create utf-8 template"
 su postgres -c "echo \"CREATE DATABASE template2 WITH owner=postgres template=template0 encoding='UTF8'\"|psql"
 
