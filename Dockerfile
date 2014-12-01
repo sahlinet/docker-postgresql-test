@@ -3,7 +3,6 @@ FROM bl-ubuntu:trusty
 RUN apt-get update 
 #RUN apt-get upgrade -y
 
-RUN apt-get update 
 RUN apt-get install -y postgresql-9.3 apg
 
 RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
