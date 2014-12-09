@@ -1,4 +1,11 @@
 echo "Setup Postgresql"
+
+# fix permission issue (https://github.com/docker/docker/issues/783)
+apt-get install ssl-cert -y
+rm -rf /etc/ssl/private
+mkdir /etc/ssl/private
+/usr/sbin/make-ssl-cert generate-default-snakeoil --force-overwrite
+
 su postgres -c "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf" &
 
 sleep 5
