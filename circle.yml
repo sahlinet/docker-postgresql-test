@@ -11,6 +11,6 @@ test:
     - sh test.sh
 deployment:
   trunk:
-    branch: develop, master
+    branch: master
     commands:
       - sh push.sh
