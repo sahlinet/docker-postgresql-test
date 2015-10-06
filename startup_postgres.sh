@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "Setup Postgresql"
 
 # fix permission issue (https://github.com/docker/docker/issues/783)
@@ -30,7 +31,7 @@ su postgres -c "echo \"CREATE ROLE $DB_USER WITH PASSWORD '$PASSWORD'\"|psql"
 echo "Create database $DB_NAME"
 su postgres -c "echo \"CREATE DATABASE $DB_NAME WITH OWNER $DB_USER TEMPLATE template2\"|psql"
 su postgres -c "echo \"ALTER ROLE $DB_USER WITH LOGIN\"|psql"
-if [ "$SUPERUSER" == "true" ]; then
+if [ "$SUPERUSER" = "true" ]; then
     su postgres -c "echo \"ALTER ROLE $DB_USER WITH SUPERUSER\"|psql"
 fi
 su postgres -c "echo \"GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER\"|psql"
