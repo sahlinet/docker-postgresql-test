@@ -1,6 +1,6 @@
-FROM philipsahli/ubuntu:trusty
+FROM philipsahli/ubuntu-v2:trusty
 
-#RUN apt-get update 
+RUN apt-get update 
 #RUN apt-get upgrade -y
 
 RUN ssh-keygen -A
@@ -15,8 +15,11 @@ RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.co
 RUN echo "local   all             all                                     md5" >> /etc/postgresql/9.3/main/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 
-ADD postgresql.conf /etc/supervisor/conf.d/
-ADD startup_postgres.sh /
+
+ADD startup_app.sh /
+RUN chmod 755 /startup_app.sh && chown postgres /startup_app.sh
+
+USER postgres
 
 
 EXPOSE 5432
