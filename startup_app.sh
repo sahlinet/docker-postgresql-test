@@ -7,6 +7,12 @@ echo "Setup Postgresql"
 #mkdir /etc/ssl/private
 #/usr/sbin/make-ssl-cert generate-default-snakeoil --force-overwrite
 
+DIR="/var/lib/postgresql/9.3/main"
+
+if [ ! -d "$DIR" ]; then
+  mkdir -p $DIR
+fi
+
 [ "$(ls -A /var/lib/postgresql/9.3/main )" ] && echo "Data-dir has data" || (echo "Running initdb"; /usr/lib/postgresql/9.3/bin/initdb -D /var/lib/postgresql/9.3/main/)
 
 /usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf &
