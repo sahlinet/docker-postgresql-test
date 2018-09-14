@@ -21,5 +21,6 @@ RUN chmod 755 /startup_app.sh && chown postgres /startup_app.sh
 
 USER postgres
 
+RUN echo 'postgres ALL=NOPASSWD: /bin/chown * /var/lib/postgresql'
 
 EXPOSE 5432

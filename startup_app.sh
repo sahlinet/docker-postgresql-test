@@ -9,6 +9,8 @@ echo "Setup Postgresql"
 
 DIR="/var/lib/postgresql/9.3/main"
 
+sudo chown postgres:postgres /var/lib/postgresql
+
 if [ ! -d "$DIR" ]; then
   mkdir -p $DIR
 fi
