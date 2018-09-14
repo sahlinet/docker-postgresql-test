@@ -1,7 +1,6 @@
 FROM philipsahli/ubuntu-v2:trusty
 
-RUN apt-get update 
-#RUN apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 RUN ssh-keygen -A
 
@@ -19,8 +18,9 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 ADD startup_app.sh /
 RUN chmod 755 /startup_app.sh && chown postgres /startup_app.sh
 
+RUN echo 'postgres ALL=NOPASSWD: /bin/chown * /var/lib/postgresql' > /etc/sudoers
+
 USER postgres
 
-RUN echo 'postgres ALL=NOPASSWD: /bin/chown * /var/lib/postgresql' > /etc/sudoers
 
 EXPOSE 5432
